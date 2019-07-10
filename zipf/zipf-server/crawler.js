@@ -16,7 +16,6 @@ module.exports = async (socketClient, urlToCrawl) => {
         } else {
             sanatizedUrl = `${urlToCrawl}/${currentUrl}`;
         }
-        // const sanatizedUrl = currentUrl.indexOf(urlToCrawl) === -1 ? `${urlToCrawl}${currentUrl}` : currentUrl;
 
         console.log('crawling', sanatizedUrl, '\n\n');
 
