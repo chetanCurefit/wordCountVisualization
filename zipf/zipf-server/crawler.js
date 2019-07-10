@@ -12,7 +12,7 @@ module.exports = async (socketClient, urlToCrawl) => {
         const currentUrl = urlQueue[currentProcessUrlIndex];
         let sanatizedUrl = '';
         if (isUrlValid(currentUrl)) {
-            sanatizedUrl = currentUrl.indexOf('http') === -1 ?( "http:" + currentUrl) : currentUrl;
+            sanatizedUrl = currentUrl.indexOf('http') === -1 ? ("http:" + currentUrl) : currentUrl;
         } else {
             sanatizedUrl = `${urlToCrawl}/${currentUrl}`;
         }
