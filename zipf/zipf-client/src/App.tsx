@@ -3,6 +3,8 @@ import './styles/App.css';
 import './styles/themeClasses.css';
 import io from 'socket.io-client';
 import { ApiConstants } from './constants/ApiConstants';
+import { AppConstants } from './constants/appConstatnts';
+
 import { connect } from 'react-redux';
 import { WordsAction } from './actions/words.action';
 import { WordBubble } from './components/WordBubble';
@@ -30,6 +32,10 @@ class App extends React.Component<IAppComponentProps, any> {
     });
     socket.on('event', (data: string[]) => {
       this.props.updateWordsList(data);
+      if (this.props.wordsList.length >= AppConstants.MAX_WORDLIST_LIMIT) {
+        socket.disconnect();
+        alert(`curated a list of ${AppConstants.MAX_WORDLIST_LIMIT} words. Disconnecting from server.`);
+      }
     });
     socket.on('disconnect', function () {
 
