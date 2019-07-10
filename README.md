@@ -1,11 +1,13 @@
 # wordFrequecyVisualization
 This app craws a given website and visualises the word frequency using Word Bubble Chart
 
+- cd zipf
 - cd zipf-server
 - npm start (start the server)
 - cd ..
 - cd zipf-client
--npm start (start the react app)
+- npm install (if necessary)
+- npm start (starts the react app)
 
 
 ### Configs File Location
