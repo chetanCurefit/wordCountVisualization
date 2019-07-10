@@ -6,6 +6,9 @@ const CONSTANTS = require('./constants')
 
 io.on('connection', (client) => {
     crawler(client, CONSTANTS.WEBSITE_TO_CRAWL);
+    client.on('disconnect', () => {
+        process.exit();
+    })
     console.log('connected');
 
 });
