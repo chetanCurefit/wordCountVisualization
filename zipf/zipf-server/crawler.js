@@ -2,6 +2,7 @@ const fetch = require('node-fetch');
 const wordsExtractor = require('./webpageWordsExtractor');
 const serverUtils = require('./utils/serverUtils')
 const CONSTANTS = require('./constants');
+const isUrlValid = require('./validateUrl');
 
 
 module.exports = async (socketClient, urlToCrawl) => {
@@ -9,7 +10,13 @@ module.exports = async (socketClient, urlToCrawl) => {
     let urlQueue = [urlToCrawl];
     while (urlQueue.length) {
         const currentUrl = urlQueue[currentProcessUrlIndex];
-        const sanatizedUrl = currentUrl.indexOf(urlToCrawl) === -1 ? `${urlToCrawl}${currentUrl}` : currentUrl;
+        let sanatizedUrl = '';
+        if (isUrlValid(currentUrl)) {
+            sanatizedUrl = currentUrl.indexOf('http') === -1 ?( "http:" + currentUrl) : currentUrl;
+        } else {
+            sanatizedUrl = `${urlToCrawl}/${currentUrl}`;
+        }
+        // const sanatizedUrl = currentUrl.indexOf(urlToCrawl) === -1 ? `${urlToCrawl}${currentUrl}` : currentUrl;
 
         console.log('crawling', sanatizedUrl, '\n\n');
 
